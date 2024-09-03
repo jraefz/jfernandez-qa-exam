@@ -1,0 +1,8 @@
+{
+    "JohnDoe": {
+        "name": "John Doe Updated",
+        "password": "newpass123",
+        "favouriteFruit": "Banana",
+        "favouriteNumber": "21"
+    }
+}

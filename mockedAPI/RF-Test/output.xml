@@ -1,0 +1,325 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 7.0 (Python 3.12.2 on darwin)" generated="2024-09-03T16:28:40.970103" rpa="false" schemaversion="5">
+<suite id="s1" name="Mock-Api" source="/Users/laptop-130/Projects/qa-test/mockedAPI/RF-Test/mock-api.robot">
+<test id="s1-t1" name="Get Home Page" line="8">
+<kw name="GET" owner="RequestsLibrary">
+<msg time="2024-09-03T16:28:41.135443" level="INFO">GET Request : url=http://localhost:9999/ 
+ path_url=/ 
+ headers={'User-Agent': 'python-requests/2.32.3', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg time="2024-09-03T16:28:41.135562" level="INFO">GET Response : url=http://localhost:9999/ 
+ status=200, reason=OK 
+ headers={'X-Powered-By': 'Express', 'Content-Type': 'text/html; charset=utf-8', 'Content-Length': '11', 'ETag': 'W/"b-o2j3cp6dyDXEwqrOJGppaV28onQ"', 'Date': 'Tue, 03 Sep 2024 08:28:41 GMT', 'Connection': 'keep-alive', 'Keep-Alive': 'timeout=5'} 
+ body=Backend API 
+ </msg>
+<msg time="2024-09-03T16:28:41.135690" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<var>${response}</var>
+<arg>${BASE_URL}/</arg>
+<doc>Sends a GET request.</doc>
+<status status="PASS" start="2024-09-03T16:28:41.079090" elapsed="0.056627"/>
+</kw>
+<kw name="Should Be Equal As Strings" owner="BuiltIn">
+<msg time="2024-09-03T16:28:41.136560" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${response.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" start="2024-09-03T16:28:41.136091" elapsed="0.000515"/>
+</kw>
+<doc>Test the GET / endpoint</doc>
+<status status="PASS" start="2024-09-03T16:28:41.078610" elapsed="0.058114"/>
+</test>
+<test id="s1-t2" name="Create User" line="13">
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2024-09-03T16:28:41.137330" level="INFO">${payload} = {'username': 'JohnDoe', 'name': 'John Doe', 'password': 'pass123', 'favouriteFruit': 'Apple', 'favouriteMovie': 'Inception', 'favouriteNumber': '42'}</msg>
+<var>${payload}</var>
+<arg>username=JohnDoe</arg>
+<arg>name=John Doe</arg>
+<arg>password=pass123</arg>
+<arg>favouriteFruit=Apple</arg>
+<arg>favouriteMovie=Inception</arg>
+<arg>favouriteNumber=42</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2024-09-03T16:28:41.137102" elapsed="0.000245"/>
+</kw>
+<kw name="POST" owner="RequestsLibrary">
+<msg time="2024-09-03T16:28:41.205046" level="INFO">POST Request : url=http://localhost:9999/user 
+ path_url=/user 
+ headers={'User-Agent': 'python-requests/2.32.3', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '149', 'Content-Type': 'application/json'} 
+ body=b'{"username": "JohnDoe", "name": "John Doe", "password": "pass123", "favouriteFruit": "Apple", "favouriteMovie": "Inception", "favouriteNumber": "42"}' 
+ </msg>
+<msg time="2024-09-03T16:28:41.205115" level="INFO">POST Response : url=http://localhost:9999/user 
+ status=200, reason=OK 
+ headers={'X-Powered-By': 'Express', 'Content-Type': 'text/html; charset=utf-8', 'Content-Length': '15', 'ETag': 'W/"f-tXmMYz2z/JdJUnvX59fYNGbG7ZY"', 'Date': 'Tue, 03 Sep 2024 08:28:41 GMT', 'Connection': 'keep-alive', 'Keep-Alive': 'timeout=5'} 
+ body=Account Created 
+ </msg>
+<msg time="2024-09-03T16:28:41.205206" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<var>${response}</var>
+<arg>${BASE_URL}/user</arg>
+<arg>json=${payload}</arg>
+<doc>Sends a POST request.</doc>
+<status status="PASS" start="2024-09-03T16:28:41.137445" elapsed="0.067779"/>
+</kw>
+<kw name="Should Be Equal As Strings" owner="BuiltIn">
+<msg time="2024-09-03T16:28:41.205766" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${response.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" start="2024-09-03T16:28:41.205376" elapsed="0.000427"/>
+</kw>
+<kw name="Should Contain" owner="BuiltIn">
+<arg>${response.text}</arg>
+<arg>Account Created</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<status status="PASS" start="2024-09-03T16:28:41.205904" elapsed="0.000335"/>
+</kw>
+<doc>Test the POST /user endpoint</doc>
+<status status="PASS" start="2024-09-03T16:28:41.136873" elapsed="0.069473"/>
+</test>
+<test id="s1-t3" name="User Exists Check" line="20">
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2024-09-03T16:28:41.206875" level="INFO">${payload} = {'username': 'JohnDoe', 'name': 'John Doe', 'password': 'pass123', 'favouriteFruit': 'Apple', 'favouriteMovie': 'Inception', 'favouriteNumber': '42'}</msg>
+<var>${payload}</var>
+<arg>username=JohnDoe</arg>
+<arg>name=John Doe</arg>
+<arg>password=pass123</arg>
+<arg>favouriteFruit=Apple</arg>
+<arg>favouriteMovie=Inception</arg>
+<arg>favouriteNumber=42</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2024-09-03T16:28:41.206713" elapsed="0.000177"/>
+</kw>
+<kw name="POST" owner="RequestsLibrary">
+<msg time="2024-09-03T16:28:41.214384" level="INFO">POST Request : url=http://localhost:9999/user 
+ path_url=/user 
+ headers={'User-Agent': 'python-requests/2.32.3', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '149', 'Content-Type': 'application/json'} 
+ body=b'{"username": "JohnDoe", "name": "John Doe", "password": "pass123", "favouriteFruit": "Apple", "favouriteMovie": "Inception", "favouriteNumber": "42"}' 
+ </msg>
+<msg time="2024-09-03T16:28:41.214436" level="INFO">POST Response : url=http://localhost:9999/user 
+ status=200, reason=OK 
+ headers={'X-Powered-By': 'Express', 'Content-Type': 'text/html; charset=utf-8', 'Content-Length': '22', 'ETag': 'W/"16-jcN1lU/WM8htTr1BI3edzYNqutk"', 'Date': 'Tue, 03 Sep 2024 08:28:41 GMT', 'Connection': 'keep-alive', 'Keep-Alive': 'timeout=5'} 
+ body=Account Already Exists 
+ </msg>
+<msg time="2024-09-03T16:28:41.214511" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<var>${response}</var>
+<arg>${BASE_URL}/user</arg>
+<arg>json=${payload}</arg>
+<doc>Sends a POST request.</doc>
+<status status="PASS" start="2024-09-03T16:28:41.207021" elapsed="0.007506"/>
+</kw>
+<kw name="Should Be Equal As Strings" owner="BuiltIn">
+<msg time="2024-09-03T16:28:41.215015" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${response.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" start="2024-09-03T16:28:41.214656" elapsed="0.000392"/>
+</kw>
+<kw name="Should Contain" owner="BuiltIn">
+<arg>${response.text}</arg>
+<arg>Account Already Exists</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<status status="PASS" start="2024-09-03T16:28:41.215142" elapsed="0.000290"/>
+</kw>
+<doc>Ensure user was created and stored correctly</doc>
+<status status="PASS" start="2024-09-03T16:28:41.206486" elapsed="0.009041"/>
+</test>
+<test id="s1-t4" name="Update User" line="28">
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2024-09-03T16:28:41.216092" level="INFO">${payload} = {'username': 'JohnDoe', 'name': 'John Doe Updated', 'password': 'newpass123', 'favouriteFruit': 'Banana', 'favouriteMovie': 'Matrix', 'favouriteNumber': '21'}</msg>
+<var>${payload}</var>
+<arg>username=JohnDoe</arg>
+<arg>name=John Doe Updated</arg>
+<arg>password=newpass123</arg>
+<arg>favouriteFruit=Banana</arg>
+<arg>favouriteMovie=Matrix</arg>
+<arg>favouriteNumber=21</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2024-09-03T16:28:41.215894" elapsed="0.000219"/>
+</kw>
+<kw name="PUT" owner="RequestsLibrary">
+<msg time="2024-09-03T16:28:41.232897" level="INFO">PUT Request : url=http://localhost:9999/user 
+ path_url=/user 
+ headers={'User-Agent': 'python-requests/2.32.3', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '158', 'Content-Type': 'application/json'} 
+ body=b'{"username": "JohnDoe", "name": "John Doe Updated", "password": "newpass123", "favouriteFruit": "Banana", "favouriteMovie": "Matrix", "favouriteNumber": "21"}' 
+ </msg>
+<msg time="2024-09-03T16:28:41.233017" level="INFO">PUT Response : url=http://localhost:9999/user 
+ status=200, reason=OK 
+ headers={'X-Powered-By': 'Express', 'Content-Type': 'text/html; charset=utf-8', 'Content-Length': '15', 'ETag': 'W/"f-V6cTsxZ1QUQPUAY6XmhVRXMsN30"', 'Date': 'Tue, 03 Sep 2024 08:28:41 GMT', 'Connection': 'keep-alive', 'Keep-Alive': 'timeout=5'} 
+ body=Account Updated 
+ </msg>
+<msg time="2024-09-03T16:28:41.233169" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<var>${response}</var>
+<arg>${BASE_URL}/user</arg>
+<arg>json=${payload}</arg>
+<doc>Sends a PUT request.</doc>
+<status status="PASS" start="2024-09-03T16:28:41.216229" elapsed="0.016960"/>
+</kw>
+<kw name="Should Be Equal As Strings" owner="BuiltIn">
+<msg time="2024-09-03T16:28:41.233716" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${response.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" start="2024-09-03T16:28:41.233339" elapsed="0.000411"/>
+</kw>
+<kw name="Should Contain" owner="BuiltIn">
+<arg>${response.text}</arg>
+<arg>Account Updated</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<status status="PASS" start="2024-09-03T16:28:41.233847" elapsed="0.000289"/>
+</kw>
+<doc>Test the PUT /user endpoint</doc>
+<status status="PASS" start="2024-09-03T16:28:41.215651" elapsed="0.018577"/>
+</test>
+<test id="s1-t5" name="Delete User" line="35">
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2024-09-03T16:28:41.234678" level="INFO">${payload} = {'username': 'JohnDoe'}</msg>
+<var>${payload}</var>
+<arg>username=JohnDoe</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2024-09-03T16:28:41.234561" elapsed="0.000132"/>
+</kw>
+<kw name="DELETE" owner="RequestsLibrary">
+<msg time="2024-09-03T16:28:41.242284" level="INFO">DELETE Request : url=http://localhost:9999/user 
+ path_url=/user 
+ headers={'User-Agent': 'python-requests/2.32.3', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '23', 'Content-Type': 'application/json'} 
+ body=b'{"username": "JohnDoe"}' 
+ </msg>
+<msg time="2024-09-03T16:28:41.242347" level="INFO">DELETE Response : url=http://localhost:9999/user 
+ status=200, reason=OK 
+ headers={'X-Powered-By': 'Express', 'Content-Type': 'text/html; charset=utf-8', 'Content-Length': '15', 'ETag': 'W/"f-3/jB2ATXVDxtuqZ4iW5mAks7bWg"', 'Date': 'Tue, 03 Sep 2024 08:28:41 GMT', 'Connection': 'keep-alive', 'Keep-Alive': 'timeout=5'} 
+ body=Account Deleted 
+ </msg>
+<msg time="2024-09-03T16:28:41.242429" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<var>${response}</var>
+<arg>${BASE_URL}/user</arg>
+<arg>json=${payload}</arg>
+<doc>Sends a DELETE request.</doc>
+<status status="PASS" start="2024-09-03T16:28:41.234770" elapsed="0.007676"/>
+</kw>
+<kw name="Should Be Equal As Strings" owner="BuiltIn">
+<msg time="2024-09-03T16:28:41.242942" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${response.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" start="2024-09-03T16:28:41.242589" elapsed="0.000387"/>
+</kw>
+<kw name="Should Contain" owner="BuiltIn">
+<arg>${response.text}</arg>
+<arg>Account Deleted</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<status status="PASS" start="2024-09-03T16:28:41.243070" elapsed="0.000287"/>
+</kw>
+<doc>Test the DELETE /user endpoint</doc>
+<status status="PASS" start="2024-09-03T16:28:41.234356" elapsed="0.009092"/>
+</test>
+<test id="s1-t6" name="User Does Not Exist Check" line="42">
+<kw name="DELETE" owner="RequestsLibrary">
+<msg time="2024-09-03T16:28:41.246811" level="INFO">DELETE Request : url=http://localhost:9999/user?username=JohnDoe 
+ path_url=/user?username=JohnDoe 
+ headers={'User-Agent': 'python-requests/2.32.3', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '0'} 
+ body=None 
+ </msg>
+<msg time="2024-09-03T16:28:41.246852" level="INFO">DELETE Response : url=http://localhost:9999/user?username=JohnDoe 
+ status=200, reason=OK 
+ headers={'X-Powered-By': 'Express', 'Content-Type': 'text/html; charset=utf-8', 'Content-Length': '22', 'ETag': 'W/"16-0GU52aIR1w4aoa3PG3WjSykDsEc"', 'Date': 'Tue, 03 Sep 2024 08:28:41 GMT', 'Connection': 'keep-alive', 'Keep-Alive': 'timeout=5'} 
+ body=Account Does Not Exist 
+ </msg>
+<msg time="2024-09-03T16:28:41.246912" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<var>${response}</var>
+<arg>${BASE_URL}/user</arg>
+<arg>params=username=JohnDoe</arg>
+<doc>Sends a DELETE request.</doc>
+<status status="PASS" start="2024-09-03T16:28:41.243780" elapsed="0.003147"/>
+</kw>
+<kw name="Should Be Equal As Strings" owner="BuiltIn">
+<msg time="2024-09-03T16:28:41.247317" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${response.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" start="2024-09-03T16:28:41.247032" elapsed="0.000314"/>
+</kw>
+<kw name="Should Contain" owner="BuiltIn">
+<arg>${response.text}</arg>
+<arg>Account Does Not Exist</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<status status="PASS" start="2024-09-03T16:28:41.247428" elapsed="0.000259"/>
+</kw>
+<doc>Ensure user does not exist after deletion</doc>
+<status status="PASS" start="2024-09-03T16:28:41.243569" elapsed="0.004195"/>
+</test>
+<test id="s1-t7" name="Update Nonexistent User" line="48">
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2024-09-03T16:28:41.248252" level="INFO">${payload} = {'username': 'NonExistentUser', 'name': 'Jane Doe', 'password': 'pass456', 'favouriteFruit': 'Orange', 'favouriteMovie': 'Matrix Reloaded', 'favouriteNumber': '30'}</msg>
+<var>${payload}</var>
+<arg>username=NonExistentUser</arg>
+<arg>name=Jane Doe</arg>
+<arg>password=pass456</arg>
+<arg>favouriteFruit=Orange</arg>
+<arg>favouriteMovie=Matrix Reloaded</arg>
+<arg>favouriteNumber=30</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2024-09-03T16:28:41.248106" elapsed="0.000161"/>
+</kw>
+<kw name="PUT" owner="RequestsLibrary">
+<msg time="2024-09-03T16:28:41.251662" level="INFO">PUT Request : url=http://localhost:9999/user 
+ path_url=/user 
+ headers={'User-Agent': 'python-requests/2.32.3', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '164', 'Content-Type': 'application/json'} 
+ body=b'{"username": "NonExistentUser", "name": "Jane Doe", "password": "pass456", "favouriteFruit": "Orange", "favouriteMovie": "Matrix Reloaded", "favouriteNumber": "30"}' 
+ </msg>
+<msg time="2024-09-03T16:28:41.251730" level="INFO">PUT Response : url=http://localhost:9999/user 
+ status=200, reason=OK 
+ headers={'X-Powered-By': 'Express', 'Content-Type': 'text/html; charset=utf-8', 'Content-Length': '22', 'ETag': 'W/"16-4faBbfuc61Mhlm9sviAI7GAhArY"', 'Date': 'Tue, 03 Sep 2024 08:28:41 GMT', 'Connection': 'keep-alive', 'Keep-Alive': 'timeout=5'} 
+ body=Account Does NOT Exist 
+ </msg>
+<msg time="2024-09-03T16:28:41.251819" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<var>${response}</var>
+<arg>${BASE_URL}/user</arg>
+<arg>json=${payload}</arg>
+<doc>Sends a PUT request.</doc>
+<status status="PASS" start="2024-09-03T16:28:41.248351" elapsed="0.003485"/>
+</kw>
+<kw name="Should Be Equal As Strings" owner="BuiltIn">
+<msg time="2024-09-03T16:28:41.252608" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${response.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" start="2024-09-03T16:28:41.252060" elapsed="0.000666"/>
+</kw>
+<kw name="Should Contain" owner="BuiltIn">
+<arg>${response.text}</arg>
+<arg>Account Does NOT Exist</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<status status="PASS" start="2024-09-03T16:28:41.252838" elapsed="0.000319"/>
+</kw>
+<doc>Ensure attempting to update a non-existent user returns an error</doc>
+<status status="PASS" start="2024-09-03T16:28:41.247878" elapsed="0.005370"/>
+</test>
+<status status="PASS" start="2024-09-03T16:28:40.971258" elapsed="0.282270"/>
+</suite>
+<statistics>
+<total>
+<stat pass="7" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat pass="7" fail="0" skip="0" id="s1" name="Mock-Api">Mock-Api</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
