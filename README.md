@@ -11,6 +11,9 @@ Management simply asks that these tests provide as much evidence as possible of 
 - Submission must include a link to a public fork/clone of this repository
 - We typically use Jest for testing node.js/API related logic and Cypress for testing UI functionality, however, you are more than welcome to use any testing framework you desire so long as you are able to provide reasonable justification
 
+**Why Robot Framework Was Used for API Testing**
+- Given the time constraints and the need for efficient testing, I opted for Robot Framework for API testing. My decision was influenced by my familiarity with Robot Framework from previous experience, which allows me to quickly set up and execute API tests without the overhead of learning a new tool under tight deadlines. In contrast, I am still in the process of learning Cypress and jest. Therefore, using Robot Framework was a practical choice for this project, though I will continue to learn Cypress and jest for future projects.
+
 # Robot Framework Installation and Mocked API Setup
 ## Mocked API Setup
 
@@ -29,7 +32,7 @@ Follow these steps to set up the mocked API:
      yarn start
      ```
      
-## Robot Framework Installation
+## Robot Framework Installation For API Testing
 
 Follow these steps to install Robot Framework and run tests:
 
